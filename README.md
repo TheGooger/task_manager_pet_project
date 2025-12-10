@@ -3,21 +3,21 @@ This is my first own FastAPI pet project
 
 
 ## Project structure:
-Main directory with app is app/
----main.py *entrance point*
----api/ *routers*
-------auth.py
-------tasks.py
----core/ *configuration files*
-------config.py
----db/ *work with database*
-------session.py *engine and session init*
-------models.py *database models*
----schemas/ *pydantic schemas*
-------user.py
-------task.py
----services/ *CRUD, controllers, logic*
----tests/ *tests*
+Main directory with app is app/<br>
+---main.py *entrance point*<br>
+---api/ *routers*<br>
+------auth.py<br>
+------tasks.py<br>
+---core/ *configuration files*<br>
+------config.py<br>
+---db/ *work with database*<br>
+------session.py *engine and session init*<br>
+------models.py *database models*<br>
+---schemas/ *pydantic schemas*<br>
+------user.py<br>
+------task.py<br>
+---services/ *CRUD, controllers, logic*<br>
+---tests/ *tests*<br>
 
 
 ## Start script
