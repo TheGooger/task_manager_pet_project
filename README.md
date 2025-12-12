@@ -25,3 +25,7 @@ Activate venv, install dependencies
 ```
 python main.py
 ```
+
+
+### Database info:
+There are two models for SQLAlchemy. Users and Tasks, connection one-to-many (one user to many tasks). Cascade in users and tasks means delete all tasks when their owner (user) is deleted.
