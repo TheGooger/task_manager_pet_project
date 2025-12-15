@@ -18,6 +18,11 @@ class Tasks(Base):
     description: Mapped[str | None]
     is_done: Mapped[bool] = mapped_column(default=False, server_default=False, index=True)
     created_at: Mapped[DateTime] = mapped_column(default=func.now(), server_default=func.now())
+    updated_at: Mapped[DateTime] = mapped_column(
+        default=func.now(),
+        server_default=func.now(),
+        onupdate=func.now,
+    )
 
     owner_id: Mapped[int] = mapped_column(
         ForeignKey("users.id", ondelete="CASCADE"),
