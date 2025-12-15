@@ -38,7 +38,7 @@ def get_db_url() -> str:
     if mode == "sync_sqlite":
         return f"sqlite:///{settings.SQLITE_FILE_PATH}"
     if mode == "async_sqlite":
-        return f"sqlite+aiosqlite://{settings.SQLITE_FILE_PATH}"
+        return f"sqlite+aiosqlite:///{settings.SQLITE_FILE_PATH}"
     
     raise RuntimeError(f"Unsupported DB_MODE: {mode}")
     
