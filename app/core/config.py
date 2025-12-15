@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     # Oprionally possible to put URL manually
     DATABASE_URL: Optional[str] = None
 
-    ECHO: bool = False
+    ECHO: bool = True
 
 
 settings = Settings()
