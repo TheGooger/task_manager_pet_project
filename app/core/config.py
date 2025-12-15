@@ -36,7 +36,7 @@ def get_db_url() -> str:
     if mode == "async_postgres":
         return f"postgresql+asyncpg://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_HOST}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}"
     if mode == "sync_sqlite":
-        return f"sqlite://{settings.SQLITE_FILE_PATH}"
+        return f"sqlite:///{settings.SQLITE_FILE_PATH}"
     if mode == "async_sqlite":
         return f"sqlite+aiosqlite://{settings.SQLITE_FILE_PATH}"
     
