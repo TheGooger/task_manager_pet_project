@@ -28,4 +28,13 @@ python main.py
 
 
 ### Database info:
-There are two models for SQLAlchemy. Users and Tasks, connection one-to-many (one user to many tasks). Cascade in users and tasks means delete all tasks when their owner (user) is deleted.
+There are two models for SQLAlchemy. Users and Tasks, connection one-to-many (one user to many tasks). Cascade in users and tasks means delete all tasks when their owner (user) is deleted. <br>
+Alembic commands for migrations: <br>
+Creating:
+```
+alembic revision --autogenerate -m "message"
+```
+Completing:
+```
+alembic upgrade head
+```
