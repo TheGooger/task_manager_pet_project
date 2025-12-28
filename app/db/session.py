@@ -1,7 +1,7 @@
 from typing import Generator, AsyncGenerator
 
 from sqlalchemy import create_engine
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker, Session
 
 from app.core.config import get_db_url, settings
@@ -37,7 +37,7 @@ elif DB_MODE.startswith("async"):
         DATABASE_URL,
         echo=settings.ECHO,
         )
-    AsyncSessionLocal = sessionmaker(
+    AsyncSessionLocal = async_sessionmaker(
         bind=async_engine,
         class_=AsyncSession,
         expire_on_commit=False,
