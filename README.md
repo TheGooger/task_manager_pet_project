@@ -23,7 +23,7 @@ Main directory with app is app/<br>
 ## Start script
 Activate venv, install dependencies 
 ```
-python main.py
+uvicorn app.main:app --reload
 ```
 
 
