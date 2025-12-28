@@ -11,8 +11,8 @@ class TaskCreate(BaseModel):
 
 class TaskUpdate(BaseModel):
     title: Optional[str] = Field(default=None, min_length=1, max_length=20)
-    description: str | None = None
-    is_done: bool | None = None
+    description: Optional[str] = None
+    is_done: Optional[bool] = None
 
 
 class TaskPublic(BaseModel):
