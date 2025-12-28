@@ -17,7 +17,7 @@ class TaskUpdate(BaseModel):
 
 class TaskPublic(BaseModel):
     id: int
-    titile: str
+    title: str
     description: str | None
     is_done: bool
     owner_id: int
