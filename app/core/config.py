@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     # For sqlite
     SQLITE_FILE_PATH:str = "sqlite.db"
 
-    # Oprionally possible to put URL manually
+    # Optionally possible to put URL manually
     DATABASE_URL: Optional[str] = None
 
     ECHO: bool = True
