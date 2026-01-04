@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     # Database regime, one of:
-    DB_MODE: Literal["sync_postgres", "async_postgres", "sync_sqlite", "async_sqlite"] = "sync_sqlite"
+    DB_MODE: Literal["sync_postgres", "async_postgres", "sync_sqlite", "async_sqlite"] = "async_postgres"
 
     # For Postgres
     POSTGRES_USER: str = "postgres"
