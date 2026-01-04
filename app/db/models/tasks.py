@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from typing import TYPE_CHECKING
 
+from sqlalchemy import String, DateTime
 from sqlalchemy import ForeignKey, false
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
@@ -16,12 +17,17 @@ class Tasks(Base):
     __tablename__ = "tasks"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str]
+    title: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str | None]
     is_done: Mapped[bool] = mapped_column(default=False, server_default=false(), index=True)
-    created_at: Mapped[datetime] = mapped_column(default=datetime.now(), server_default=func.now())
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=datetime.now(timezone.utc),
+        server_default=func.now(),
+    )
     updated_at: Mapped[datetime] = mapped_column(
-        default=datetime.now(),
+        DateTime(timezone=True),
+        default=datetime.now(timezone.utc),
         server_default=func.now(),
         onupdate=func.now,
     )
