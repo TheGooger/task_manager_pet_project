@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from sqlalchemy.orm import sessionmaker, Session
 
 from app.core.config import get_db_url, settings
+from .models import Base
 
 
 DATABASE_URL = get_db_url()
@@ -52,3 +53,9 @@ elif DB_MODE.startswith("async"):
 
 else:
     raise RuntimeError(f"Unknown DB_MODE: {DB_MODE}")
+
+
+async def init_db() -> None:
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
