@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.db.session import get_session
 from app.schemas.user import UserCreate, UserPublic
-from app.crud.user import get_user_by_email, create_user
+from app.db.data.user import get_user_by_email, create_user
 from app.core.security import verify_password, create_access_token
 from app.schemas.token import Token
 
