@@ -15,3 +15,9 @@ class UserPublic(BaseModel):
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True) # Only for ORM -> pydantic
+
+
+class UserModify(BaseModel):
+    email: EmailStr | None = None
+    password: str | None = None
+    is_active: bool | None = None
