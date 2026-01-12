@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from sqlalchemy import select
+from typing import Sequence
 
 from app.db.session import get_session
 from app.schemas.task import TaskPublic, TaskCreate
@@ -32,4 +34,39 @@ def create_task(
     db.commit()
     db.refresh(task)
     return task
-    
+
+
+@router.get(
+    "/",
+    response_model=list[TaskPublic],
+)
+def get_user_tasks(
+    is_done: bool | None = None,
+    limit: int = 10,
+    offset: int = 0,
+    db: Session = Depends(get_session),
+    user: Users = Depends(get_current_user),
+) -> Sequence[Tasks]:
+    query = select(Tasks).where(Tasks.owner_id == user.id)
+    if is_done is not None:
+        query = query.where(Tasks.is_done == is_done)
+    query = query.limit(limit).offset(offset)
+    return db.scalars(query).all()
+
+
+@router.get(
+    "/{task_id}",
+    response_model=TaskPublic,
+)
+def get_task_by_id(
+    task_id: int,
+    db: Session = Depends(get_session),
+    user: Users = Depends(get_current_user),
+) -> Tasks:
+    task = db.scalar(select(Tasks).where(Tasks.id == task_id, Tasks.owner_id == user.id))
+    if not task:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Task not found",
+        )
+    return task
