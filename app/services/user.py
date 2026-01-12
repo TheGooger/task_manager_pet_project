@@ -1,26 +1,23 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.schemas.user import UserCreate, UserPublic, UserModify
-from app.db.data import user as data
-from app.core.security import get_hash
+from app.schemas.user import UserCreate
+from app.services.auth import get_hash
+from app.db.models.users import Users
+    
+
+def get_user_by_email(db: Session, email: str) -> Users | None:
+    return db.scalar(select(Users).where(Users.email == email))
 
 
-def get_all(db: Session) -> list[UserPublic]:
-    return data.get_all(db)
+def create_user(db: Session, user_in: UserCreate) -> Users:
+    user = Users(
+        email=user_in.email,
+        password_hash=get_hash(user_in.password),
+        is_active=True,
+    )
 
-
-def get_one(id: int, db: Session) -> UserPublic:
-    return data.get_one(id, db)
-
-
-def create(user: UserCreate, db: Session) -> UserPublic:
-    hash_password = get_hash(user.password)
-    return data.create(user.email, hash_password, db)
-
-
-def modify(id: int, user: UserModify, db: Session) -> UserPublic:
-    return data.modify(id, user, db)
-
-
-def delete(id: int, db: Session):
-    return data.delete(id, db)
+    db.add(user)
+    db.commit()
+    db.refresh(user) # for Python object, upload new (id) info from DB
+    return user
