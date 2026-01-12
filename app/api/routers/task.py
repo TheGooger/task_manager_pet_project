@@ -26,6 +26,7 @@ def create_task(
     task = Tasks(
         title = new_task.title,
         description = new_task.description,
+        owner_id = user.id
     )
     db.add(task)
     db.commit()
