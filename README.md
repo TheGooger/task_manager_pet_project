@@ -7,7 +7,7 @@ Main directory with app is app/<br>
 ---main.py *entrance point*<br>
 ---api/ *routers and deps*<br>
 ---core/ *configuration (db) and security (auth) files*<br>
----db/ *db models, engine/session init, data processing*<br>
+---db/ *db models, engine/session init*<br>
 ---schemas/ *pydantic schemas*<br>
 ---services/ *CRUD*<br>
 ---tests/ *tests*<br>
